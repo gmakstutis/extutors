@@ -1,0 +1,38 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Link;
+use Drupal\views\Views;
+use Drupal\Component\Utility\Html;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Component\Utility\Xss;
+use Drupal\Core\DependencyInjection\ContainerNotInitializedException;
+use Drupal\Core\Field\AllowedTagsXssTrait;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function extutors_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+    switch ($entity->bundle()) {
+      // Here you modify only your day content type
+      case 'course':
+        // Setting the title with the value of field_date.
+        $name = $entity->get('title')->value;
+        $type = $entity->get('field_course_type')->value;
+        $variant = $entity->get('field_variant')->value;
+        $title = "[".$type."] ".$name;
+        if ($variant){
+          $title = $title." (".$variant.")";
+        }
+        
+        $entity->setTitle($title);
+       break;
+    }
+  }

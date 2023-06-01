@@ -1,0 +1,9 @@
+name: External Tutors
+type: module
+description: Helper functions for External Tutor System
+core_version_requirement: ^8 || ^9 || ^10
+package: External Tutor Tracking
+# The list of dependencies must contains the 'field' value
+dependencies:
+  - field
+  - block
