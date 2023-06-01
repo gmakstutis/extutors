@@ -31,8 +31,9 @@ function extutors_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
         if ($variant){
           $title = $title." (".$variant.")";
         }
-        
-        $entity->setTitle($title);
+        if ($entity->isNew()){
+          $entity->setTitle($title);
+        }
        break;
     }
   }

@@ -1,0 +1,31 @@
+<div class="fs-3">Invoice Date: {{ node.field_invoice_date.value }}</div>
+<div class="fs-3">Tutor: <a href="/node/{{node.field_tutor.entity.nid.value}}">{{ node.field_tutor.entity.title.value }}</a></div>
+<div>{{ node.field_course.entity.title.value }}</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Course</th>
+            <th>Fee</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in node.field_line_item %}
+        <tr>
+            <td>{{ item.entity.field_item_date.value }}</td>
+            <td><a href="/node/{{ item.entity.field_course.entity.nid.value }}">{{ item.entity.field_course.entity.title.value }}</a></td>
+            <td class="text-end">{{ item.entity.field_value.value }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2">&nbsp;</td>
+            <td class="text-end">
+                {% set sum = 0 %}
+                {% for value in node.field_line_item %}
+                    {% set sum = sum + value.entity.field_value.value %}
+                {% endfor %}
+                {{ sum|number_format(2,'.',',') }}
+            </td>
+        </tr>
+    </tbody>
+</table>
