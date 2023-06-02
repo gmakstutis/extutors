@@ -16,21 +16,27 @@
                     <tr>
                         <th>&nbsp;</th>
                         <th>Invoice Date</th>
+                        <th>Event Date</th>
                         <th>Tutor</th>
                         <th>Fee</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% set total = 0 %}
-                    {% for inv in node.field_course_invoices %}
+                    {% for inv in node.field_tutor_fees %}
                         <tr>
-                            <td><a href="/node/{{inv.entity.nid.value}}">View</a></td>
-                            <td>{{ inv.entity.field_invoice_date.value }}</td>
-                            <td><a href="/node/{{inv.entity.field_tutor.entity.nid.value}}">{{ inv.entity.field_tutor.entity.title.value }}</a></td>
+                            <td><a href="/node/{{inv.entity.field_parent.entity.nid.value}}">View</a></td>
+                            <td>{{inv.entity.field_parent.entity.field_invoice_date.value}}</td>
+                            <td>{{ inv.entity.field_event_date.value }}</td>
+                            <td>
+                                <a href="/node/{{inv.entity.field_parent.entity.field_tutor.entity.nid.value}}">
+                                    {{ inv.entity.field_parent.entity.field_tutor.entity.title.value }}
+                                </a>
+                            </td>
                             <td class="text-end">
                                 {% set sum = 0 %}
-                                    {% for value in inv.entity.field_line_item %}
-                                        {% set sum = sum + value.entity.field_value.value %}
+                                    {% for fee in inv.entity.field_fee %}
+                                        {% set sum = sum + fee.value %}
                                     {% endfor %}
                                 {{ sum|number_format(2,'.',',') }}
                             </td>
@@ -38,7 +44,7 @@
                         {% set total = total + sum %}
                     {% endfor %}
                     <tr>
-                        <td colspan="3" class="text-end fw-bold">Total</td>
+                        <td colspan="4" class="text-end fw-bold">Total</td>
                         <td class="text-end fw-bold">{{ total|number_format(2,'.',',') }}</td>
                     </tr>
                 </tbody>
