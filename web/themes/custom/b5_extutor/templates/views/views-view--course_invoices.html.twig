@@ -1,0 +1,24 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Invoice Date</th>
+            <th>Tutor</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% set total = 0 %}
+        {% for row in rows %}
+            {{ row }}
+        {% endfor %}
+        <tr>
+            <td colspan="3" class="text-end">
+            {% set total = 0 %}
+            {% for row in rows %}
+                {{ row.fields.field_fee.content }}<br />
+            {% endfor %}</td>
+            <td>{{ total }}</td>
+        </tr>
+    </tbody>
+</table>

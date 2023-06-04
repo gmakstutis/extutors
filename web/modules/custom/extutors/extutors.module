@@ -35,5 +35,11 @@ function extutors_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
           $entity->setTitle($title);
         }
        break;
+      case "invoice":
+        foreach($entity->get('field_invoice_items') as $fee){
+          $sum = $sum + $fee->entity->field_fee->value;
+        }
+        $entity->set('field_invoice_total',$sum);
+        break;
     }
   }

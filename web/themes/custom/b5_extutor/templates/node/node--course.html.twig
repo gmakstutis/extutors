@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered table-striped">
+            <!--<table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
@@ -34,11 +34,7 @@
                                 </a>
                             </td>
                             <td class="text-end">
-                                {% set sum = 0 %}
-                                    {% for fee in inv.entity.field_fee %}
-                                        {% set sum = sum + fee.value %}
-                                    {% endfor %}
-                                {{ sum|number_format(2,'.',',') }}
+                               {{ inv.entity.field_parent.entity.field_invoice_total.value }}
                             </td>
                         </tr>
                         {% set total = total + sum %}
@@ -48,7 +44,8 @@
                         <td class="text-end fw-bold">{{ total|number_format(2,'.',',') }}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+            {{ drupal_view('course_invoices','page_1') }}
         </div>
     </div>
 </div>

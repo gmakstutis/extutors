@@ -1,0 +1,15 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Invoice Date</th>
+            <th>Tutor</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            {{ row }}
+        {% endfor %}
+    </tbody>
+</table>

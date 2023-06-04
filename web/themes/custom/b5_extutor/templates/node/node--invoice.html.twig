@@ -24,13 +24,9 @@
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="2">&nbsp;</td>
+            <td colspan="2" class="text-end">TOTAL</td>
             <td class="text-end">
-                {% set sum = 0 %}
-                {% for value in node.field_invoice_items %}
-                    {% set sum = sum + value.entity.field_fee.value %}
-                {% endfor %}
-                {{ sum|number_format(2,'.',',') }}
+                {{ node.field_invoice_total.value }}
             </td>
         </tr>
     </tbody>
