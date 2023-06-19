@@ -21,9 +21,7 @@ use Drupal\Core\Field\AllowedTagsXssTrait;
  */
 function extutors_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
     switch ($entity->bundle()) {
-      // Here you modify only your day content type
-      case 'course':
-        // Setting the title with the value of field_date.
+      /*case 'course':
         $name = $entity->get('title')->value;
         $type = $entity->get('field_course_type')->value;
         $variant = $entity->get('field_variant')->value;
@@ -34,12 +32,6 @@ function extutors_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
         if ($entity->isNew()){
           $entity->setTitle($title);
         }
-       break;
-      case "invoice":
-        foreach($entity->get('field_invoice_items') as $fee){
-          $sum = $sum + $fee->entity->field_fee->value;
-        }
-        $entity->set('field_invoice_total',$sum);
-        break;
+       break;*/
     }
   }

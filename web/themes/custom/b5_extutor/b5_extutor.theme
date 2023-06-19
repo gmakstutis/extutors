@@ -4,3 +4,14 @@
  * @file
  * Bootstrap 5 External Tutor Tracker theme file.
  */
+function b5_extutor_preprocess_page(&$variables){
+  $variables['route'] = \Drupal::routeMatch()->getRouteName();
+  if (\Drupal::routeMatch()->getRouteName() == "entity.node.canonical"){
+    $path = \Drupal::service('path.current')->getPath();
+    $args = explode('/',$path);
+    $arg = end($args);
+    $node = \Drupal::entityTypeManager()->getStorage('node')->load($arg);
+    $type = $node->getType();
+    $variables['type'] = $type;
+  }
+}
